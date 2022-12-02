@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de reservaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item-sliding *ngFor="let item of reservaciones; let i=index">
+            <ion-label>Nombre: {{item.nombre}}<br>Teléfono: {{item.tel}}<br>Total: {{item.total}}</ion-label>
+                
+        </ion-item-sliding>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

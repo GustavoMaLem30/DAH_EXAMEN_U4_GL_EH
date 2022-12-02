@@ -22,5 +22,9 @@ export class ClienteService {
         });
       }));
     }
+    public getClienteByTel(tel:string){
+      let result = this.firestore.collection('cliente').doc(tel).valueChanges();
+      return result;
+    }
   }
   

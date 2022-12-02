@@ -11,6 +11,15 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'new-reservaciones',
+    loadChildren: () => import('./new-reservaciones/new-reservaciones.module').then( m => m.NewReservacionesPageModule)
+  },  {
+    path: 'reservaciones',
+    loadChildren: () => import('./reservaciones/reservaciones.module').then( m => m.ReservacionesPageModule)
+  },
+
+
 ];
 
 @NgModule({
