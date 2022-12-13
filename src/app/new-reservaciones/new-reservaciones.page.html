@@ -1,29 +1,40 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Agregar reservación</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-datetime size="cover" displayFormat="MM/DD/YYYY" min="2022-12-02" max="2030-12-09"></ion-datetime>
-  <ion-item>
-    <ion-range min={0} max={100} step={20}>
-      <ion-icon size="small" slot="start" name="sunny"></ion-icon>
-      <ion-icon slot="end" name="sunny"></ion-icon>
-    </ion-range>
-  </ion-item>
-  <ion-item>
-    <ion-label>Mesa</ion-label>
-    <ion-toggle>mesa</ion-toggle>  
-  </ion-item>
-  <ion-item>
-    <ion-label>Brincolin</ion-label>
-    <ion-toggle>brincolin</ion-toggle> 
-  </ion-item>
-  <ion-item>
-    <ion-label>Futbolito</ion-label>
-    <ion-toggle>futbolito</ion-toggle>
-  </ion-item>
-  <ion-item><ion-label>Total: </ion-label></ion-item>
-  <ion-button>Registrar Reservacion</ion-button>
+  <form [formGroup]="myForm">
+    <ion-datetime formControlName="date" size="cover" displayFormat="MM/DD/YYYY" [min]="dateInLimit" [value]="dateToday"
+      max="2030-12-09"></ion-datetime>
+    <ion-item>
+      <ion-range [ticks]="true" [snaps]="true" [min]="0" [max]="5" (ionChange)="rangePool($event)" [pin]="true"
+        [pinFormatter]="pinFormatter" color="secondary">
+        <ion-icon size="small" slot="start" name="water-outline" color="secondary"></ion-icon>
+        <ion-icon slot="end" name="fish-outline" color="secondary"></ion-icon>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mesa</ion-label>
+      <ion-toggle (ionChange)="toggleMesa($event)" color="tertiary">mesa</ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Brincolin</ion-label>
+      <ion-toggle (ionChange)="toggleBrincolin($event)" color="warning">brincolin</ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Futbolito</ion-label>
+      <ion-toggle (ionChange)="toggleFutbolito($event)" color="secondary">futbolito</ion-toggle>
+    </ion-item>
+    <ion-item [disabled]="ava">
+      <ion-label>Total: </ion-label>
+      <ion-input formControlName="total">{{total}}
+      </ion-input>
+    </ion-item>
+    <ion-button [disabled]="!myForm.valid" (click)="alertReservation()">Registrar Reservacion</ion-button>
+  </form>
 </ion-content>

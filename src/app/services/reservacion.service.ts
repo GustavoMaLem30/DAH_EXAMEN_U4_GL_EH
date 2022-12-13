@@ -17,7 +17,6 @@ export class ReservacionService {
       map(actions =>{
         return actions.map(a =>{
           const data = a.payload.doc.data() as Reservacion;
-          console.log(data);
           const id = a.payload.doc.id;
           return {id,...data};
         });
@@ -30,8 +29,6 @@ export class ReservacionService {
     this.firestore.collection('reservacion').doc(pos).delete();
   }
   public async updateReservacion(reservacion:Reservacion,id: string){
-    console.log(reservacion.date);
-    console.log(id);
     try{
        let result = await this.firestore.collection('reservacion').doc(id).update(reservacion );
       return result

@@ -1,16 +1,31 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Lista de reservaciones</ion-title>
+    <ion-item>
+      <ion-toggle color="danger" (ionChange)="rese2($event)">futbolito</ion-toggle>
+      <ion-label>Próximos 2</ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-row>
     <ion-col>
-      <ion-list>
+      <ion-list *ngIf="!show">
         <ion-item-sliding *ngFor="let item of reservaciones; let i=index">
+          <ion-item>
             <ion-label>Nombre: {{item.nombre}}<br>Teléfono: {{item.tel}}<br>Total: {{item.total}}</ion-label>
-                
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+      <ion-list *ngIf="show">
+        <ion-item-sliding *ngFor="let item of reservaciones2; let i=index">
+          <ion-item>
+            <ion-label>Nombre: {{item.nombre}}<br>Teléfono: {{item.tel}}<br>Total: {{item.total}}</ion-label>
+          </ion-item>
         </ion-item-sliding>
       </ion-list>
     </ion-col>

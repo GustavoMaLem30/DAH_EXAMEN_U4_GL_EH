@@ -16,14 +16,14 @@ export class ClienteService {
       map(actions =>{
         return actions.map(a =>{
           const data = a.payload.doc.data() as Cliente;
-          console.log(data);
           const id = a.payload.doc.id;
           return {id,...data};
         });
       }));
     }
-    public getClienteByTel(tel:string){
-      let result = this.firestore.collection('cliente').doc(tel).valueChanges();
+    
+    public getClienteById(id:string){
+      let result = this.firestore.collection('cliente').doc(id).valueChanges();
       return result;
     }
   }

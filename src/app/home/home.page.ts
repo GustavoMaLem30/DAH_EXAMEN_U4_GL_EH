@@ -3,6 +3,7 @@ import { ClienteService } from '../services/cliente.service';
 import { Router } from '@angular/router';
 import { Cliente } from '../models/cliente';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -20,7 +21,6 @@ export class HomePage {
     this.cliente = [];
     this.clienteService.getCliente().subscribe(res =>{
       this.cliente = res;
-      console.log(this.cliente);
     });
   }
   ngOnInit() {
@@ -40,18 +40,15 @@ export class HomePage {
   }
   public async ingresar(){
     let tele = this.myForm.controls.user.value
-    console.log('Entra');
     
     if(tele == 777){
-      console.log('Admin');
       this.router.navigate(['/reservaciones']);
     }else{
       var result = this.cliente.find(({tel})=>tel === tele)
-
-
+      this.client = result as Cliente;
       if(!(result==null)){
-        this.router.navigate(['/newReservaciones'],{
-          queryParams: {tele : tele},
+        this.router.navigate(['/new-reservaciones'],{
+          queryParams: {id : this.client.id},
         });
         return console.log('cliente encontrado');
       }else{
